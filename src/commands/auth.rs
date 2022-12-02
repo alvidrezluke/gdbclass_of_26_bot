@@ -19,10 +19,7 @@ pub async fn run(
     #[cfg(debug_assertions)]
     dotenv::dotenv().ok();
 
-    let password = match std::env::var("MOLE_PASSWORD") {
-        Ok(pass) => pass,
-        Err(_) => panic!("Can not find the password in environment"),
-    };
+    let password = std::env::var("MOLE_PASSWORD").unwrap();
 
     let option = options
         .get(0)

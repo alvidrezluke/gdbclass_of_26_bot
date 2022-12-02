@@ -25,6 +25,7 @@ impl EventHandler for Handler {
                 commands
                     .create_application_command(|command| commands::auth::register(command))
                     .create_application_command(|command| commands::deauth::register(command))
+                    .create_application_command(|command| commands::pronouns::register(command))
             })
             .await;
 
@@ -50,6 +51,9 @@ impl EventHandler for Handler {
                     .await
                 }
                 "deauth" => commands::deauth::run(&command.user, &ctx).await,
+                "pronouns" => {
+                    commands::pronouns::run(&command.data.options, &command.user, &ctx).await
+                }
                 _ => "not implemented :(".to_string(),
             };
 
